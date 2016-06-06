@@ -1,12 +1,10 @@
-FROM        versioneye/ruby-base:2.3.0
+FROM        versioneye/ruby-base:2.3.1
 MAINTAINER  Robert Reiz <reiz@versioneye.com>
 
 ADD . /app
 
-RUN apt-get update && apt-get install -y supervisor; \
-    cp /app/supervisord.conf /etc/supervisord.conf; \
-    cd /app/ && bundle install;
+RUN cd /app/ && bundle install;
 
-EXPOSE 8080
+EXPOSE 9090
 
-CMD /usr/bin/supervisord -c /etc/supervisord.conf
+CMD bundle exec puma -C config/puma.rb
