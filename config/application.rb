@@ -16,6 +16,15 @@ Bundler.require(*Rails.groups)
 
 module Versioneye
   class Application < Rails::Application
+
+    begin
+      p " instantiate VersioneyeCore ... "
+      VersioneyeCore.new
+    rescue => e
+      p e.message
+      p e.backtrace.join("\n")
+    end
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
