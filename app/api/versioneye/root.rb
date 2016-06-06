@@ -6,7 +6,7 @@ module Versioneye
     format :json
     prefix :api
 
-    mount Versioneye::ComponentApi
+    mount Versioneye::ComponentsApi
 
     add_swagger_documentation \
       info: {
