@@ -22,6 +22,7 @@ module ComponentHelpers
       components << {
         :component_id => product.to_param.to_s,
         :package => product.prod_type,
+        :language => product.language,
         :name => product.name,
         :description => product.description,
         :created => product.created_at,

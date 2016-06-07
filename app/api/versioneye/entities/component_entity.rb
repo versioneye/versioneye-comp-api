@@ -12,6 +12,7 @@ module EntitiesV2
   class ComponentEntity < Grape::Entity
     expose :component_id
     expose :package
+    expose :language
     expose :name
     expose :description
     expose :created
