@@ -15,7 +15,7 @@ module ComponentHelpers
           :name => Repository.name_for(repo.src),
           :url => repo.src,
           :repo_type => repo_type,
-          :updated => product.updated_at
+          :updated => repo.updated_at
         }
       end
 
