@@ -19,6 +19,22 @@ module ComponentHelpers
         }
       end
 
+      versions = []
+      product.versions.each do |version|
+        license_a = []
+        licenses = License.where( :language => product.language, :prod_key => product.prod_key, :version => version.to_s )
+        licenses.each do |license|
+          next if license_a.include?(license.name)
+          license_a << license.name
+        end
+        versions << {
+          :version => version.to_s,
+          :released => version.released_at,
+          :vulnerabilities => version.sv_ids,
+          :licenses => license_a
+        }
+      end
+
       components << {
         :component_id => product.to_param.to_s,
         :package => product.prod_type,
@@ -27,7 +43,8 @@ module ComponentHelpers
         :description => product.description,
         :created => product.created_at,
         :modified => product.updated_at,
-        :sources => sources
+        :sources => sources,
+        :versions => versions
       }
 
     end

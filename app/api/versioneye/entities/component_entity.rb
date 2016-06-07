@@ -9,6 +9,13 @@ module EntitiesV2
     expose :updated
   end
 
+  class ComponentVersionEntity < Grape::Entity
+    expose :version
+    expose :released
+    expose :vulnerabilities
+    expose :licenses
+  end
+
   class ComponentEntity < Grape::Entity
     expose :component_id
     expose :package
@@ -17,7 +24,8 @@ module EntitiesV2
     expose :description
     expose :created
     expose :modified
-    expose :sources, :using => ComponentSourceEntity
+    expose :sources,  :using => ComponentSourceEntity
+    expose :versions, :using => ComponentVersionEntity
   end
 
 end
