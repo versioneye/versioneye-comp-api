@@ -10,7 +10,7 @@ module Versioneye
 
     add_swagger_documentation \
       info: {
-        title: "VersionEye API", description: "This is the VersionEye component API. \
+        title: "VersionEye API", description: "This is the VersionEye API. \
         Get your API key here: <a href='https://www.versioneye.com/settings/api'>https://www.versioneye.com/settings/api</a>"
       }
 
