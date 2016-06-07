@@ -14,7 +14,7 @@ gem 'mongoid'       , '~> 5.1.0'
 gem 'htmlentities'  , '~> 4.3.2'
 gem 'bunny'         , '~> 2.3.0'
 
-gem 'versioneye-core'    , :git => 'https://github.com/versioneye/versioneye-core.git', :tag => 'v8.20.15'
+gem 'versioneye-core'    , :git => 'https://github.com/versioneye/versioneye-core.git', :tag => 'v8.21.0'
 
 group :test do
   gem 'simplecov'         , '~> 0.11.1'
