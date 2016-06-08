@@ -37,6 +37,24 @@ module Versioneye
         present components, with: EntitiesV2::ComponentEntity
       end
 
+      desc "fetch component by created time range"
+      params do
+        optional :api_key, type: String, desc: "API Key"
+        optional :language, type: String, desc: "Programming language"
+      end
+      get '/created/:from_date/:to_date' do
+        authorized?
+        from_date  = params[:from_date].to_s
+        to_date    = params[:to_date].to_s
+        products   = Product.where( :created_at.gte => from_date, :created_at.lte => to_date )
+        language = Product.decode_language( params[:language].to_s )
+        if language
+          products = products.where(:language => language)
+        end
+        components = comp_mapping( products )
+        present components, with: EntitiesV2::ComponentEntity
+      end
+
     end
 
   end
