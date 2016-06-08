@@ -4,8 +4,12 @@ module ComponentHelpers
 
 
   def comp_mapping products
+    i = 0
     components = []
     products.each do |product|
+      i += 1
+      p i
+      break if i > 9
 
       sources = []
       product.repositories.each do |repo|
