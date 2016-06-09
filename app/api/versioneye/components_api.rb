@@ -20,7 +20,9 @@ module Versioneye
         optional :package_type, type: String, desc: "Package Manager"
       end
       get '/:component_id' do
+        rate_limit
         authorized?
+        track_apikey
 
         comp_id  = params[:component_id].to_s
         comp_id  = comp_id.gsub(":", "/")
@@ -43,7 +45,10 @@ module Versioneye
         optional :language, type: String, desc: "Programming language"
       end
       get '/created/:from_date/:to_date' do
+        rate_limit
         authorized?
+        track_apikey
+
         from_date  = params[:from_date].to_s
         to_date    = params[:to_date].to_s
         products   = Product.where( :created_at.gte => from_date, :created_at.lte => to_date )
