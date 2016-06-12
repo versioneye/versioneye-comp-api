@@ -13,6 +13,7 @@ module Versioneye
 
     resource :components do
 
+
       desc "fetch component by id"
       params do
         optional :api_key, type: String, desc: "API Key"
@@ -38,6 +39,7 @@ module Versioneye
         components = comp_mapping( products )
         present components, with: EntitiesV2::ComponentEntity
       end
+
 
       desc "fetch component by created time range"
       params do

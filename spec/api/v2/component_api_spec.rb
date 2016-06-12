@@ -96,4 +96,37 @@ describe Versioneye::ComponentsApi, :type => :request do
 
   end
 
+
+  describe "get components by time range" do
+
+    it 'returns component by time range' do
+      product = ProductFactory.create_for_maven('junit', 'junit', '1.0.0')
+      expect( product.save ).to be_truthy
+
+      yesterday = URI.encode( (Time.now - 1.day).to_s )
+      tomorrow  = URI.encode( (Time.now + 1.day).to_s )
+
+      package_url =  "#{product_uri}/created/#{yesterday.to_s}/#{tomorrow.to_s}?language=Java&api_key=#{user_api.api_key}"
+      get package_url
+      json = JSON.parse response.body
+      expect( response.status ).to eql(200)
+      expect( json ).to_not be_empty
+    end
+
+    it 'returns nothing because time range is out of scope' do
+      product = ProductFactory.create_for_maven('junit', 'junit', '1.0.0')
+      expect( product.save ).to be_truthy
+
+      d1 = URI.encode( (Time.now - 10.day).to_s )
+      d2 = URI.encode( (Time.now - 8.day).to_s )
+
+      package_url =  "#{product_uri}/created/#{d1.to_s}/#{d2.to_s}?language=Java&api_key=#{user_api.api_key}"
+      get package_url
+      json = JSON.parse response.body
+      expect( response.status ).to eql(200)
+      expect( json ).to be_empty
+    end
+
+  end
+
 end
