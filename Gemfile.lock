@@ -1,13 +1,13 @@
 GIT
   remote: https://github.com/versioneye/versioneye-core.git
-  revision: 6524fa7ec708b0296898e59fcf3bf6a9c3390cd8
-  tag: v8.21.1
+  revision: e55f17a7dd80d62e13524835ec4a85f0dd7ce2bb
+  tag: v8.21.4
   specs:
-    versioneye-core (8.21.1)
+    versioneye-core (8.21.4)
       actionmailer (~> 4.2.6)
       aws-sdk (~> 2.3.0)
       bundler (~> 1.12.5)
-      bunny (~> 2.3.0)
+      bunny (~> 2.4.0)
       cocoapods-core (~> 0.39.0)
       dalli (~> 2.7.0)
       etcd (~> 0.3.0)
@@ -71,19 +71,19 @@ GEM
     amq-protocol (2.0.1)
     ansi (1.5.0)
     arel (6.0.3)
-    aws-sdk (2.3.12)
-      aws-sdk-resources (= 2.3.12)
-    aws-sdk-core (2.3.12)
+    aws-sdk (2.3.13)
+      aws-sdk-resources (= 2.3.13)
+    aws-sdk-core (2.3.13)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.3.12)
-      aws-sdk-core (= 2.3.12)
+    aws-sdk-resources (2.3.13)
+      aws-sdk-core (= 2.3.13)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
     bson (4.1.1)
     builder (3.2.2)
-    bunny (2.3.1)
+    bunny (2.4.0)
       amq-protocol (>= 2.0.1)
     byebug (9.0.5)
     capybara (2.7.1)
@@ -241,7 +241,7 @@ GEM
       activesupport (= 4.2.6)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (11.1.2)
+    rake (11.2.2)
     ref (2.0.0)
     rest-client (1.8.0)
       http-cookie (>= 1.0.2, < 2.0)
@@ -283,7 +283,7 @@ GEM
     sawyer (0.7.0)
       addressable (>= 2.3.5, < 2.5)
       faraday (~> 0.8, < 0.10)
-    selenium-webdriver (2.53.0)
+    selenium-webdriver (2.53.1)
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
@@ -348,7 +348,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bunny (~> 2.3.0)
+  bunny (~> 2.4.0)
   byebug
   capybara (~> 2.7.0)
   capybara-firebug (~> 2.1.0)
