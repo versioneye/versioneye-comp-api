@@ -27,6 +27,30 @@ describe Versioneye::ComponentsApi, :type => :request do
         :name => "MIT"  })
       expect( license.save ).to be_truthy
 
+      archive = Versionarchive.new({
+        :language => product.language,
+        :prod_key => product.prod_key,
+        :version_id => '1.0.0',
+        :name => "junit.jar",
+        :link => "http://bintrany.com/junit/junit.jar"  })
+      expect( archive.save ).to be_truthy
+
+      archive = Versionarchive.new({
+        :language => product.language,
+        :prod_key => product.prod_key,
+        :version_id => '1.0.0',
+        :name => "junit.pom",
+        :link => "http://bintrany.com/junit/junit.pom"  })
+      expect( archive.save ).to be_truthy
+
+      archive = Versionarchive.new({
+        :language => product.language,
+        :prod_key => product.prod_key,
+        :version_id => '1.0.0',
+        :name => "junit-javadoc.jar",
+        :link => "http://bintrany.com/junit/junit-javadoc.jar"  })
+      expect( archive.save ).to be_truthy
+
       package_url =  "#{product_uri}/junit:junit?api_key=#{user_api.api_key}"
       get package_url
       expect( response.status ).to eql(200)
@@ -45,6 +69,8 @@ describe Versioneye::ComponentsApi, :type => :request do
       expect( component['versions'].first['version'] ).to eq( '1.0.0' )
       expect( component['versions'].first['licenses'].count ).to eq( 1 )
       expect( component['versions'].first['licenses'].first ).to eq( 'MIT' )
+      expect( component['versions'].first['files'].count ).to eq( 2 )
+      expect( component['versions'].first['files'].first['name'] ).to eq( 'junit.jar' )
     end
 
     it "returns the correct product" do

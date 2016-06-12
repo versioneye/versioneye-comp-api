@@ -31,11 +31,22 @@ module ComponentHelpers
           next if license_a.include?(license.name)
           license_a << license.name
         end
+
+        files = {}
+        archives = Versionarchive.where( :language => product.language, :prod_key => product.prod_key, :version_id => version.to_s )
+        archives.each do |archive|
+          next if files.keys.include?(archive.name)
+          next if archive.language.eql?("Java") && !archive.name.match(/javadoc\.jar\z/i).nil?
+          next if archive.language.eql?("Java") && !archive.name.match(/sources\.jar\z/i).nil?
+          files[archive.name] = {:name => archive.name, :url => archive.link}
+        end
+
         versions << {
           :version => version.to_s,
           :released => version.released_at,
           :vulnerabilities => version.sv_ids,
-          :licenses => license_a
+          :licenses => license_a,
+          :files => files.values
         }
       end
 

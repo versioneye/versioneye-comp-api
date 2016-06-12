@@ -14,6 +14,7 @@ module EntitiesV2
     expose :released
     expose :vulnerabilities
     expose :licenses
+    expose :files
   end
 
   class ComponentEntity < Grape::Entity
