@@ -12,7 +12,7 @@ describe Versioneye::ComponentsApi, :type => :request do
 
   describe "GET detailed info for specific component" do
 
-    it "returns error code for not existing product" do
+    it "returns the correct product" do
       product = ProductFactory.create_for_maven('junit', 'junit', '1.0.0')
       expect( product.save ).to be_truthy
 
@@ -45,6 +45,53 @@ describe Versioneye::ComponentsApi, :type => :request do
       expect( component['versions'].first['version'] ).to eq( '1.0.0' )
       expect( component['versions'].first['licenses'].count ).to eq( 1 )
       expect( component['versions'].first['licenses'].first ).to eq( 'MIT' )
+    end
+
+    it "returns the correct product" do
+      product = ProductFactory.create_for_maven('junit', 'junit', '1.0.0')
+      expect( product.save ).to be_truthy
+
+      repository = Repository.new({ :src => 'https://jcenter.bintray.com', :repotype => "Maven2" })
+      expect( product.repositories.push( repository ) )
+      expect( product.save )
+
+      package_url =  "#{product_uri}/junit:junit?language=Java&api_key=#{user_api.api_key}"
+      get package_url
+      expect( response.status ).to eql(200)
+      json = JSON.parse response.body
+      component = json.first
+      expect( component['component_id'] ).to eq( 'junit:junit' )
+    end
+
+    it "returns the correct product" do
+      product = ProductFactory.create_for_maven('junit', 'junit', '1.0.0')
+      expect( product.save ).to be_truthy
+
+      repository = Repository.new({ :src => 'https://jcenter.bintray.com', :repotype => "Maven2" })
+      expect( product.repositories.push( repository ) )
+      expect( product.save )
+
+      package_url =  "#{product_uri}/junit:junit?language=Java&package_type=Maven2&api_key=#{user_api.api_key}"
+      get package_url
+      expect( response.status ).to eql(200)
+      json = JSON.parse response.body
+      component = json.first
+      expect( component['component_id'] ).to eq( 'junit:junit' )
+    end
+
+    it "returns false because of wrong language" do
+      product = ProductFactory.create_for_maven('junit', 'junit', '1.0.0')
+      expect( product.save ).to be_truthy
+
+      repository = Repository.new({ :src => 'https://jcenter.bintray.com', :repotype => "Maven2" })
+      expect( product.repositories.push( repository ) )
+      expect( product.save )
+
+      package_url =  "#{product_uri}/junit:junit?language=PHP&package_type=Maven2&api_key=#{user_api.api_key}"
+      get package_url
+      json = JSON.parse response.body
+      expect( response.status ).to eql(200)
+      expect( json ).to be_empty
     end
 
   end
