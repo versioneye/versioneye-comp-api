@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/versioneye/versioneye-core.git
-  revision: e55f17a7dd80d62e13524835ec4a85f0dd7ce2bb
-  tag: v8.21.4
+  revision: 312cd85202a84ed699cdfeadb34f288497cc8cc0
+  tag: v8.23.2
   specs:
-    versioneye-core (8.21.4)
+    versioneye-core (8.23.2)
       actionmailer (~> 4.2.6)
       aws-sdk (~> 2.3.0)
       bundler (~> 1.12.5)
@@ -283,7 +283,7 @@ GEM
     sawyer (0.7.0)
       addressable (>= 2.3.5, < 2.5)
       faraday (~> 0.8, < 0.10)
-    selenium-webdriver (2.53.1)
+    selenium-webdriver (2.53.2)
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
