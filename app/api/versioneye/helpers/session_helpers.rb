@@ -85,19 +85,20 @@ module SessionHelpers
   def rate_limit
     return if Rails.env.enterprise? == true
 
-    api   = fetch_api
-    ip    = remote_ip_address
+    api = fetch_api
+    ip  = remote_ip_address
 
     tunit = Time.now - 1.hour
-    calls_last_hour = ApiCall.where(:created_at.gt => tunit, :ip => ip).count
 
     if api.nil?
+      calls_last_hour = ApiCall.where(:created_at.gt => tunit, :ip => ip).count
       if calls_last_hour.to_i >= 5
         error! "API rate limit exceeded. With an API key you can extend your rate limit. Sign up for free and get an API key!", 403
         Rails.logger.info "API rate limit exceeded from #{ip} with no API Key!"
         return
       end
     else
+      calls_last_hour = ApiCall.where( :created_at.gte => tunit, :api_key => api.api_key ).count
       rate_limit = 50
       rate_limit = api.rate_limit if api && api.respond_to?(:rate_limit)
       if calls_last_hour.to_i >= rate_limit.to_i
