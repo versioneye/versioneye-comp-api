@@ -7,6 +7,7 @@ module Versioneye
     prefix :api
 
     mount Versioneye::ComponentsApi
+    mount Versioneye::VulnerabilitiesApi
 
     add_swagger_documentation \
       info: {
