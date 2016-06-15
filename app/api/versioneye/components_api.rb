@@ -53,9 +53,8 @@ module Versioneye
 
         from_date  = params[:from_date].to_s.sub(/^..../, '2016')
         to_date    = params[:to_date].to_s.sub(/^..../, '2016')
-        p "#{from_date} - #{to_date}"
         products   = Product.where( :created_at.gte => from_date, :created_at.lte => to_date, :language => 'Java' )
-        p "products: #{products.count}"
+        Rails.logger.info "#{products.count} products found for time range from #{from_date} to #{to_date}"
         # language = Product.decode_language( params[:language].to_s )
         # if language
         #   products = products.where(:language => language)
